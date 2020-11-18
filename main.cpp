@@ -3,14 +3,16 @@
 #include <map>
 
 #include "stack_allocator.h"
-#include "custom_vector.h"
-#include "a_custom_vector.h"
+#include "custom_vector_container.h"
+// #include "custom_vector.h"
+// #include "a_custom_vector.h"
 
-template <class T, std::size_t N> using A = stack_allocator<T, N>;
+template <class T, std::size_t N> using CA = stack_allocator<T, N>; // custom allocator
 template <class T, std::size_t N> using Vector = std::vector<T, stack_allocator<T, N>>;
-template <class T, std::size_t N> using CVector = CustomVector<T>;
-template <class T, std::size_t N> using ACVector = aCustomVector<T, stack_allocator<T, N>>;
-template <class Key, class T, std::size_t N> using Map =
+// template <class T, std::size_t N> using CVector = CustomVector<T>; // custom vector with std::allocator
+template <class T, std::size_t N> using CACVector = 
+	aCustomVector<T, stack_allocator<T, N>>; // custom vector with custom allocator
+template <class Key, class T, std::size_t N> using CAMap = // map with custom allocator
 	std::map <
 		Key,
 		T,
@@ -31,12 +33,12 @@ int main() {
 
 	// CustomVector<int> vec;
 	std::map<int, int> m;
-	Map<int, int, arena_size> m_custom_allocator {
-		A<std::map<int, int>, arena_size>(a)
+	CAMap<int, int, arena_size> m_custom_allocator {
+		CA<std::map<int, int>, arena_size>(a)
 	};
 
 	Vector<int, arena_size> v_custom_allocator {
-		A<std::vector<int>, arena_size>(a)
+		CA<std::vector<int>, arena_size>(a)
 	};
 
 	std::vector<int, stack_allocator<int, arena_size>> v_custom_allocator_1 {
@@ -45,7 +47,7 @@ int main() {
 
 	aCustomVector<int, std::allocator<int>> vec;
 	aCustomVector<int, stack_allocator<int, arena_size>> ca_vec {
-		stack_allocator<int, arena_size>(a)
+		CA<std::vector<int>, arena_size>(a)
 	};
 
 	for (int i = 0; i < container_size; ++i) {

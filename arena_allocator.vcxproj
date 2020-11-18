@@ -144,7 +144,7 @@
   <ItemGroup>
     <ClInclude Include="arena.h" />
     <ClInclude Include="arena_allocator.h" />
-    <ClInclude Include="a_custom_vector.h" />
+    <ClInclude Include="custom_vector_container.h" />
     <ClInclude Include="custom_vector.h" />
     <ClInclude Include="ntarena_allocator.h" />
     <ClInclude Include="stack_allocator.h" />
