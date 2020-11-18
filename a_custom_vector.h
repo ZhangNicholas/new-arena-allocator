@@ -41,6 +41,9 @@ template<
 struct aCustomVector {
 	std::vector<T, Allocator> vec_;
 
+	aCustomVector() {
+		std::vector<T, std::allocator<T>> vec_;
+	};
 
 	aCustomVector(Allocator al) : vec_{ al } {
 	};

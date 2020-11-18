@@ -29,7 +29,7 @@ int main() {
 	arena<arena_size> a;
 
 
-	CustomVector<int> vec;
+	// CustomVector<int> vec;
 	std::map<int, int> m;
 	Map<int, int, arena_size> m_custom_allocator {
 		A<std::map<int, int>, arena_size>(a)
@@ -43,7 +43,7 @@ int main() {
 		stack_allocator<int, arena_size>(a)
 	};
 
-	// aCustomVector<int> vec;
+	aCustomVector<int, std::allocator<int>> vec;
 	aCustomVector<int, stack_allocator<int, arena_size>> ca_vec {
 		stack_allocator<int, arena_size>(a)
 	};
@@ -56,8 +56,6 @@ int main() {
 	for (const auto& it : m_custom_allocator) {
 		std::cout << it.first << ' ' << it.second << std::endl;
 	}
-
-
 
 	for (int i = 0; i < container_size; ++i) {
 		v_custom_allocator_1.push_back(factorial(i));
@@ -73,7 +71,7 @@ int main() {
 		vec.push_back(i);
 	}
 
-	for (It<int> it = vec.begin(); it != vec.end(); ++it) {
+	for (aIt<int> it = vec.begin(); it != vec.end(); ++it) {
 		std::cout << *it << std::endl;
 	}
 	
